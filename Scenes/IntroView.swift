@@ -10,37 +10,60 @@ import SwiftUI
 struct IntroView: View {
     @State var step = 0
     @EnvironmentObject var navigation: NavigationCoordinator
+    init() {
+        UINavigationBar.setAnimationsEnabled(false)
+    }
     var body: some View {
         GeometryReader { geometry in
-            Image("board_background")
-                .resizable()
-                    .overlay(alignment: .topLeading) {
-                        if step > 0 {
-                            MessageView(finalText: "Olá, hoje você irá aprender como jogar xadrez!", fontSize: .system(size: geometry.size.height * 0.05))
-                                .padding(.top, 100)
-                                .padding(.leading, 60)
-                        }
-          
-                    }
-                    .overlay(alignment: .center) {
-                        if step > 1 {
-                            MessageView(finalText: "O xadrez é um jogo muito divertido que pode ajudar a melhorar o seu pensamento estratégico e sua habilidade de tomar decisões.", fontSize: .system(size: geometry.size.height * 0.05))
-                                .padding(.top, 100)
-                                .padding([.trailing, .leading], 100)
-                        }
-                    }
-                    .overlay(alignment: .bottomTrailing) {
-                        NextButton {
-                            step = step + 1
-                            if step > 2 {
-                                navigation.pushScene(scene: .aboutChess)
+            ZStack {
+                Color.gray
+                    .ignoresSafeArea()
+                VStack(spacing: 0){
+                    Image("board_background")
+                        .resizable()
+                            .overlay(alignment: .topLeading) {
+                                if step > 0 {
+                                    MessageView(finalText: "Olá, hoje você irá aprender como jogar xadrez!", fontSize: .system(size: geometry.size.height * 0.05))
+                                        .padding(.top, 100)
+                                        .padding(.leading, 60)
+                                }
+                  
+                            }
+                            .overlay(alignment: .center) {
+                                if step > 1 {
+                                    MessageView(finalText: "O xadrez é um jogo muito divertido que pode ajudar a melhorar o seu pensamento estratégico e sua habilidade de tomar decisões.", fontSize: .system(size: geometry.size.height * 0.05))
+                                        .padding(.top, 100)
+                                        .padding([.trailing, .leading], 100)
+                                }
+                            }
+                            .ignoresSafeArea()
+                    ZStack {
+                        Rectangle()
+                            .fill(.clear)
+                        HStack {
+                            ActionButton(image: "back_button") {
+                                if step > 0 {
+                                    step = step - 1
+                                }
+                            }
+                            .disabled(step <= 1)
+                            .opacity(step > 1 ? 1 : 0.2)
+                            
+                            ActionButton(image: "next_button") {
+                                if step <= 2 {
+                                    step = step + 1
+                                }
+                                if step > 2 {
+                                    navigation.pushScene(scene: .aboutChess)
+                                    step = step - 1
+                                }
                             }
                         }
                     }
-                    .ignoresSafeArea()
-                    .onAppear {
-                        step = 1
+                    .frame(height: geometry.size.height * 0.25)
+
                 }
+            }
         }
         
     }

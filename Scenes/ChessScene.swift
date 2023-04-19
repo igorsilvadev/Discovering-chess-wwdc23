@@ -28,14 +28,6 @@ class ChessScene: SKScene, ObservableObject {
         resetGame()
     }
     
-    convenience init(size: CGSize, sceneMode: ChessSceneMode) {
-        self.init(size: size)
-        switch sceneMode {
-        case .pawnTutorial:
-            showOnlyLightPawns()
-        }
-    }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -80,24 +72,15 @@ class ChessScene: SKScene, ObservableObject {
     }
     
     
-    func showOnlyLightPawns() {
+    func showOnlyLightPieces(pieces: [PieceType]) {
        board.board.forEach { rows in
             rows.forEach { piece in
-                piece?.sprite.isHidden = piece?.type != .pawn || piece?.player == .dark
+                piece?.sprite.isHidden = !pieces.contains(piece?.type ?? .none) || piece?.player == .dark
             }
         }
     }
     
-    func movePawn(isTwoTile: Bool = false) {
-        guard let piece = board.board[1][4] else { return }
-        animateMove(piece: piece, to: isTwoTile ? (3,4) : (2,4)) {
-            
-        }
-    }
-    
-    
-    
-    func animateMove(piece: Piece, to: Tile, completion: @escaping () -> Void) {
+    func animateMove(piece: Piece, to: Tile, completion: @escaping () -> Void = {}) {
         piece.sprite.run(moveAnimation(to: CGPoint(
             x: to.1 * GlobalDefinitions.tileSize + GlobalDefinitions.spriteOffset,
             y: to.0 * GlobalDefinitions.tileSize + GlobalDefinitions.spriteOffset

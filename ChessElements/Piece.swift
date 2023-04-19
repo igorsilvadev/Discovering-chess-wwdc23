@@ -20,7 +20,7 @@ enum PlayerType: String {
 
 
 enum PieceType: String {
-    case pawn, rook, knight, bishop, king, queen
+    case pawn, rook, knight, bishop, king, queen, none
 }
 
 class Piece: Equatable, Identifiable {
@@ -32,7 +32,6 @@ class Piece: Equatable, Identifiable {
     var type: PieceType
     var sprite: SKSpriteNode
     var player: PlayerType
-    var value: Int = 0
     var canTakeEnPassant: Bool = false
     var tile: Tile
     
@@ -47,7 +46,6 @@ class Piece: Equatable, Identifiable {
         sprite.size = GlobalDefinitions.spriteSize
         self.player = player
         self.tile = tile
-        value = pieceValue(type: type, player: player)
     }
     
     init(_ existingPiece: Piece) {
@@ -55,27 +53,9 @@ class Piece: Equatable, Identifiable {
         type = existingPiece.type
         sprite = existingPiece.sprite
         player = existingPiece.player
-        value = existingPiece.value
         canTakeEnPassant = existingPiece.canTakeEnPassant
         tile = existingPiece.tile
     }
     
     func copy() -> Piece { Piece(self) }
-    
-    private func pieceValue(type: PieceType, player: PlayerType) -> Int {
-        let value: Int
-        switch type {
-        case .pawn:
-            value = 1
-        case .knight, .bishop:
-            value = 3
-        case .rook:
-            value = 5
-        case .queen:
-            value = 9
-        case .king:
-            value = 999
-        }
-        return player == .light ? value : -value
-    }
 }

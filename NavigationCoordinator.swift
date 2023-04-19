@@ -10,7 +10,8 @@ import SwiftUI
 
 
 enum SceneType: Hashable {
-    case pawn
+    case pawnTutorial
+    case pawnPromotion
     case aboutChess
 }
 

@@ -11,11 +11,14 @@ struct MyApp: App {
                     .environmentObject(navigation)
                     .navigationDestination(for: SceneType.self) { scene in
                         switch scene {
-                        case .pawn:
+                        case .pawnTutorial:
                             PawnTutorialView()
                                 .environmentObject(navigation)
                         case .aboutChess:
                             AboutChessGameView()
+                                .environmentObject(navigation)
+                        case .pawnPromotion:
+                            PawnPromotionView()
                                 .environmentObject(navigation)
                         }
                     }

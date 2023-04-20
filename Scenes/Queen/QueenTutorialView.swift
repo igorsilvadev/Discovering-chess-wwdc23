@@ -1,5 +1,5 @@
 //
-//  RookTutorialView.swift
+//  QueenTutorialView.swift
 //  
 //
 //  Created by Igor Silva on 19/04/23.
@@ -8,9 +8,9 @@
 import SwiftUI
 import SpriteKit
 
-struct RookTutorialView: View {
+struct QueenTutorialView: View {
     
-    @StateObject  var scene = RookScene(size: CGSize(width: 320, height: 320))
+    @StateObject  var scene = QueenScene(size: CGSize(width: 320, height: 320))
     @State private var step = 1
     @EnvironmentObject var navigation: NavigationCoordinator
     
@@ -21,10 +21,10 @@ struct RookTutorialView: View {
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
                     SpriteView(scene: scene)
-                        .overlay(alignment: .top) {
+                        .overlay(alignment: .bottom) {
                             if step > 0 {
-                                MessageView(finalText: "As torres só podem se mover para frente, para trás ou para os lados.", fontSize: .system(size: geometry.size.height * 0.05))
-                                    .padding(70)
+                                MessageView(finalText: "A rainha pode se mover em qualquer direção.", fontSize: .system(size: geometry.size.height * 0.05))
+                                    .padding(.bottom, 50)
                             }
                         }
                     ZStack {
@@ -37,20 +37,20 @@ struct RookTutorialView: View {
                                 } else {
                                     if step > 1 {
                                         step = step - 1
-                                        scene.moveRook(step)
+                                        scene.moveQueen(step)
                                     }
                                 }
                             }
                             
                             ActionButton(image: "next_button") {
-                                if step <= 3 {
+                                if step <= 6 {
                                     step = step + 1
                                 }
-                                scene.moveRook(step)
+                                scene.moveQueen(step)
                                 switch step {
-                                case 4:
+                                case 7:
                                     step -= 1
-                                    navigation.pushScene(scene: .queenTutorial)
+                                    navigation.pushScene(scene: .aboutChess)
                                 default:
                                     break
                                 }
@@ -61,17 +61,10 @@ struct RookTutorialView: View {
                 }
                 .ignoresSafeArea()
                 .onAppear {
-                    scene.hidePieces(showPieces: [.knight, .pawn, .bishop, .rook], color: [.light])
-                    scene.rookStartPosition(canSetup: step == 1)
+                    scene.hidePieces(showPieces: [.knight, .bishop, .rook, .queen], color: [.dark])
                 }
             }
             .navigationBarBackButtonHidden(true)
         }
-    }
-}
-
-struct RookTutorialView_Previews: PreviewProvider {
-    static var previews: some View {
-        RookTutorialView()
     }
 }

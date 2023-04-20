@@ -16,6 +16,7 @@ enum SceneType: Hashable {
     case knightTutorial
     case bishopTutorial
     case rookTutorial
+    case queenTutorial
 }
 
 class NavigationCoordinator: ObservableObject {

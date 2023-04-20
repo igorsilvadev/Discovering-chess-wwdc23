@@ -29,6 +29,9 @@ struct MyApp: App {
                         case .rookTutorial:
                             RookTutorialView()
                                 .environmentObject(navigation)
+                        case .queenTutorial:
+                            QueenTutorialView()
+                                .environmentObject(navigation)
                         }
                     }
             }

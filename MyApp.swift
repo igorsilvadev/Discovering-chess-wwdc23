@@ -20,6 +20,15 @@ struct MyApp: App {
                         case .pawnPromotion:
                             PawnPromotionView()
                                 .environmentObject(navigation)
+                        case .knightTutorial:
+                            KnightTutorialView()
+                                .environmentObject(navigation)
+                        case .bishopTutorial:
+                            BishopTutorialView()
+                                .environmentObject(navigation)
+                        case .rookTutorial:
+                            RookTutorialView()
+                                .environmentObject(navigation)
                         }
                     }
             }

@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 
 enum PlayerType: String {
-    case light, dark
+    case light, dark, none
 
     var opposite: PlayerType { (self == .light) ? .dark : .light }
     

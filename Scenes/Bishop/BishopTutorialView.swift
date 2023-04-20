@@ -1,21 +1,17 @@
 //
-//  PawnPromotion.swift
+//  SwiftUIView.swift
 //  
 //
-//  Created by Igor Silva on 17/04/23.
+//  Created by Igor Silva on 19/04/23.
 //
 
 import SwiftUI
 import SpriteKit
 
-struct PawnPromotionView: View {
-    @StateObject var scene = PawnScene(size: CGSize(width: 320, height: 320))
-    @EnvironmentObject var navigation: NavigationCoordinator
+struct BishopTutorialView: View {
+    @StateObject  var scene = BishopScene(size: CGSize(width: 320, height: 320))
     @State private var step = 1
-    
-    init() {
-        UINavigationBar.setAnimationsEnabled(false)
-    }
+    @EnvironmentObject var navigation: NavigationCoordinator
     
     var body: some View {
         GeometryReader { geometry in
@@ -24,9 +20,10 @@ struct PawnPromotionView: View {
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
                     SpriteView(scene: scene)
-                        .overlay(alignment: .center) {
+                        .overlay(alignment: .top) {
                             if step > 0 {
-                                MessageView(finalText: "Quando um peão chega ao final do tabuleiro, ele pode se transformar em uma peça mais poderosa, como uma rainha.", fontSize: .system(size: geometry.size.height * 0.05))
+                                MessageView(finalText: "Os bispos só podem se mover na diagonal.", fontSize: .system(size: geometry.size.height * 0.05))
+                                    .padding(70)
                             }
                         }
                     ZStack {
@@ -39,20 +36,20 @@ struct PawnPromotionView: View {
                                 } else {
                                     if step > 1 {
                                         step = step - 1
-                                        scene.pawnPromotion(step)
+                                        scene.moveBishop(step)
                                     }
                                 }
                             }
                             
                             ActionButton(image: "next_button") {
-                                if step <= 2 {
+                                if step <= 3 {
                                     step = step + 1
                                 }
-                                scene.pawnPromotion(step)
+                                scene.moveBishop(step)
                                 switch step {
-                                case 3:
-                                    step = 2
-                                    navigation.pushScene(scene: .aboutChess)
+                                case 4:
+                                    step -= 1
+                                    navigation.pushScene(scene: .rookTutorial)
                                 default:
                                     break
                                 }
@@ -63,7 +60,8 @@ struct PawnPromotionView: View {
                 }
                 .ignoresSafeArea()
                 .onAppear {
-                    scene.hidePieces(hide: step == 1)
+                    scene.hidePieces(showPieces: [.knight, .pawn, .bishop], color: [.light])
+                    scene.hideMidPawns()
                 }
             }
             .navigationBarBackButtonHidden(true)
@@ -71,8 +69,8 @@ struct PawnPromotionView: View {
     }
 }
 
-struct PawnPromotionView_Previews: PreviewProvider {
+struct BishopTutorialView_Previews: PreviewProvider {
     static var previews: some View {
-        PawnPromotionView()
+        BishopTutorialView()
     }
 }

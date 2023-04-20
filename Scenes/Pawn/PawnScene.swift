@@ -10,11 +10,6 @@ import SpriteKit
 
 class PawnScene: ChessScene {
     
-    func hidePieces(hide: Bool = false) {
-        guard hide else { return }
-        showOnlyLightPieces(pieces: [.none])
-    }
-    
     func pawnPromotion(_ step: Int) {
         guard let pawn = board.board[6][3] else { return }
         

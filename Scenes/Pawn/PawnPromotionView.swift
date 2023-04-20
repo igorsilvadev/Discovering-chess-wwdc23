@@ -1,7 +1,14 @@
+//
+//  PawnPromotion.swift
+//  
+//
+//  Created by Igor Silva on 17/04/23.
+//
+
 import SwiftUI
 import SpriteKit
 
-struct PawnTutorialView: View {
+struct PawnPromotionView: View {
     @StateObject var scene = PawnScene(size: CGSize(width: 320, height: 320))
     @EnvironmentObject var navigation: NavigationCoordinator
     @State private var step = 1
@@ -11,18 +18,15 @@ struct PawnTutorialView: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in 
+        GeometryReader { geometry in
             ZStack {
                 Color.gray
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
                     SpriteView(scene: scene)
-                        .overlay(alignment: .topLeading) {
+                        .overlay(alignment: .center) {
                             if step > 0 {
-                                MessageView(finalText: "Os peões só podem se mover para frente, uma casa de cada vez, exceto no seu primeiro movimento, quando pode mover duas casas.", fontSize: .system(size: geometry.size.height * 0.05))
-                                    .padding(.top, 100)
-                                    .padding(.leading, 100)
-                                    .padding(.trailing, 100)
+                                MessageView(finalText: "Quando um peão chega ao final do tabuleiro, ele pode se transformar em uma peça mais poderosa, como uma rainha.", fontSize: .system(size: geometry.size.height * 0.05))
                             }
                         }
                     ZStack {
@@ -35,20 +39,20 @@ struct PawnTutorialView: View {
                                 } else {
                                     if step > 1 {
                                         step = step - 1
-                                        scene.movePawn(step)
+                                        scene.pawnPromotion(step)
                                     }
                                 }
                             }
                             
                             ActionButton(image: "next_button") {
-                                if step <= 3 {
+                                if step <= 2 {
                                     step = step + 1
                                 }
-                                scene.movePawn(step)
+                                scene.pawnPromotion(step)
                                 switch step {
-                                case 4:
-                                    navigation.pushScene(scene: .pawnPromotion)
-                                    step = 3
+                                case 3:
+                                    step = 2
+                                    navigation.pushScene(scene: .knightTutorial)
                                 default:
                                     break
                                 }
@@ -59,10 +63,16 @@ struct PawnTutorialView: View {
                 }
                 .ignoresSafeArea()
                 .onAppear {
-                    scene.showOnlyLightPieces(pieces: [.pawn])
+                    scene.hidePieces(hide: step == 1, showPieces: [.none], color: [.none])
                 }
             }
             .navigationBarBackButtonHidden(true)
         }
+    }
+}
+
+struct PawnPromotionView_Previews: PreviewProvider {
+    static var previews: some View {
+        PawnPromotionView()
     }
 }

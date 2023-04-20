@@ -72,12 +72,14 @@ class ChessScene: SKScene, ObservableObject {
     }
     
     
-    func showOnlyLightPieces(pieces: [PieceType]) {
-       board.board.forEach { rows in
-            rows.forEach { piece in
-                piece?.sprite.isHidden = !pieces.contains(piece?.type ?? .none) || piece?.player == .dark
-            }
-        }
+    
+    func hidePieces(hide: Bool = true, showPieces: [PieceType], color: [PlayerType]) {
+        guard hide else { return }
+        board.board.forEach { rows in
+             rows.forEach { piece in
+                 piece?.sprite.isHidden = !showPieces.contains(piece?.type ?? .none) || !color.contains(piece?.player ?? .none)
+             }
+         }
     }
     
     func animateMove(piece: Piece, to: Tile, completion: @escaping () -> Void = {}) {

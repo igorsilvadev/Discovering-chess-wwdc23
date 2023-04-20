@@ -50,9 +50,6 @@ struct AboutChessGameView: View {
                                     }
                                 }
                             }
-                           // ActionButton(image: "action_button") {
-                                
-                         //   }
                             ActionButton(image: "next_button") {
                                 if step <= 2 {
                                     step = step + 1

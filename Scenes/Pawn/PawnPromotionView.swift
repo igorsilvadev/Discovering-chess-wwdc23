@@ -26,7 +26,7 @@ struct PawnPromotionView: View {
                     SpriteView(scene: scene)
                         .overlay(alignment: .center) {
                             if step > 0 {
-                                MessageView(finalText: "Quando um peão chega ao final do tabuleiro, ele pode se transformar em uma peça mais poderosa, como uma rainha.", fontSize: .system(size: geometry.size.height * 0.05))
+                                MessageView(finalText: "When a pawn reaches the opposite side of the board, it can be promoted to a more powerful piece, such as a queen.", fontSize: .system(size: geometry.size.height * 0.05))
                             }
                         }
                     ZStack {

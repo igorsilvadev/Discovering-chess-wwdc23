@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct MyApp: App {
+struct StartApp: App {
     @StateObject var navigation = NavigationCoordinator()
     var body: some Scene {
         WindowGroup {
@@ -31,6 +31,12 @@ struct MyApp: App {
                                 .environmentObject(navigation)
                         case .queenTutorial:
                             QueenTutorialView()
+                                .environmentObject(navigation)
+                        case .kingTutorial:
+                            KingTutorialView()
+                                .environmentObject(navigation)
+                        case .final:
+                            FinalView()
                                 .environmentObject(navigation)
                         }
                     }

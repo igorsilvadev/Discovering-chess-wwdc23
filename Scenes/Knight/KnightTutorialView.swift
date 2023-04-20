@@ -21,7 +21,7 @@ struct KnightTutorialView: View {
                     SpriteView(scene: scene)
                         .overlay(alignment: .top) {
                             if step > 0 {
-                                MessageView(finalText: "Os cavalos podem pular sobre outras peças e se mover em um \"L\".", fontSize: .system(size: geometry.size.height * 0.05))
+                                MessageView(finalText: "Knights can jump over other pieces and move in an \"L\" shape. ", fontSize: .system(size: geometry.size.height * 0.05))
                                     .padding(70)
                             }
                         }

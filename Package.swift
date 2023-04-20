@@ -20,16 +20,16 @@ let package = Package(
             teamIdentifier: "272983AP33",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .gamepad),
+            appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.green),
             supportedDeviceFamilies: [
                 .pad,
                 .phone
             ],
             supportedInterfaceOrientations: [
-                           .landscapeRight,
-                           .landscapeLeft
-           ],
+                .landscapeRight,
+                .landscapeLeft
+            ],
             appCategory: .boardGames
         )
     ],

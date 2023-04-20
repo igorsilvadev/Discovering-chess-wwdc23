@@ -23,7 +23,7 @@ struct RookTutorialView: View {
                     SpriteView(scene: scene)
                         .overlay(alignment: .top) {
                             if step > 0 {
-                                MessageView(finalText: "As torres só podem se mover para frente, para trás ou para os lados.", fontSize: .system(size: geometry.size.height * 0.05))
+                                MessageView(finalText: "Rooks can only move forward, backward, or sideways.", fontSize: .system(size: geometry.size.height * 0.05))
                                     .padding(70)
                             }
                         }
@@ -62,7 +62,7 @@ struct RookTutorialView: View {
                 .ignoresSafeArea()
                 .onAppear {
                     scene.hidePieces(showPieces: [.knight, .pawn, .bishop, .rook], color: [.light])
-                    scene.rookStartPosition(canSetup: step == 1)
+                    scene.rookStartPosition()
                 }
             }
             .navigationBarBackButtonHidden(true)

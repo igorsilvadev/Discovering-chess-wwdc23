@@ -33,19 +33,6 @@ struct MessageView: View {
             }
         
     }
-    
-    func typeWriter(at position: Int = 0) {
-        if position == 0 {
-            text = ""
-        }
-        if position < finalText.count {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.09) {
-                text.append(finalText[position])
-                typeWriter(at: position + 1)
-            }
-        }
-    }
-
 }
 
 struct MessageView_Previews: PreviewProvider {

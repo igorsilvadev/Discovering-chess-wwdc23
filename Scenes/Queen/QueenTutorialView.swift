@@ -23,7 +23,7 @@ struct QueenTutorialView: View {
                     SpriteView(scene: scene)
                         .overlay(alignment: .bottom) {
                             if step > 0 {
-                                MessageView(finalText: "A rainha pode se mover em qualquer direção.", fontSize: .system(size: geometry.size.height * 0.05))
+                                MessageView(finalText: "The queen can move in any direction.", fontSize: .system(size: geometry.size.height * 0.05))
                                     .padding(.bottom, 50)
                             }
                         }
@@ -50,7 +50,7 @@ struct QueenTutorialView: View {
                                 switch step {
                                 case 7:
                                     step -= 1
-                                    navigation.pushScene(scene: .aboutChess)
+                                    navigation.pushScene(scene: .kingTutorial)
                                 default:
                                     break
                                 }

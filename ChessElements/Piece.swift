@@ -10,12 +10,6 @@ import SpriteKit
 
 enum PlayerType: String {
     case light, dark, none
-
-    var opposite: PlayerType { (self == .light) ? .dark : .light }
-    
-    mutating func toggle() {
-        self = self.opposite
-    }
 }
 
 
@@ -23,16 +17,11 @@ enum PieceType: String {
     case pawn, rook, knight, bishop, king, queen, none
 }
 
-class Piece: Equatable, Identifiable {
-    static func == (lhs: Piece, rhs: Piece) -> Bool {
-        lhs.sprite == rhs.sprite
-    }
-    
-    var moveCount: Int = 0
+class Piece: Identifiable {
+
     var type: PieceType
     var sprite: SKSpriteNode
     var player: PlayerType
-    var canTakeEnPassant: Bool = false
     var tile: Tile
     
     init(
@@ -47,15 +36,4 @@ class Piece: Equatable, Identifiable {
         self.player = player
         self.tile = tile
     }
-    
-    init(_ existingPiece: Piece) {
-        moveCount = existingPiece.moveCount
-        type = existingPiece.type
-        sprite = existingPiece.sprite
-        player = existingPiece.player
-        canTakeEnPassant = existingPiece.canTakeEnPassant
-        tile = existingPiece.tile
-    }
-    
-    func copy() -> Piece { Piece(self) }
 }

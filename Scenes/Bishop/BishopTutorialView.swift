@@ -22,7 +22,7 @@ struct BishopTutorialView: View {
                     SpriteView(scene: scene)
                         .overlay(alignment: .top) {
                             if step > 0 {
-                                MessageView(finalText: "Os bispos só podem se mover na diagonal.", fontSize: .system(size: geometry.size.height * 0.05))
+                                MessageView(finalText: "Bishops can only move diagonally.", fontSize: .system(size: geometry.size.height * 0.05))
                                     .padding(70)
                             }
                         }

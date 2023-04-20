@@ -23,7 +23,7 @@ struct IntroView: View {
                         .resizable()
                             .overlay(alignment: .topLeading) {
                                 if step > 0 {
-                                    MessageView(finalText: "Olá, hoje você irá aprender como jogar xadrez!", fontSize: .system(size: geometry.size.height * 0.05))
+                                    MessageView(finalText: "Hi, I would love to teach you how to play chess!", fontSize: .system(size: geometry.size.height * 0.05))
                                         .padding(.top, 100)
                                         .padding(.leading, 60)
                                 }
@@ -31,7 +31,7 @@ struct IntroView: View {
                             }
                             .overlay(alignment: .center) {
                                 if step > 1 {
-                                    MessageView(finalText: "O xadrez é um jogo muito divertido que pode ajudar a melhorar o seu pensamento estratégico e sua habilidade de tomar decisões.", fontSize: .system(size: geometry.size.height * 0.05))
+                                    MessageView(finalText: "Chess is a very fun game that can help improve your strategic thinking and decision-making skills.", fontSize: .system(size: geometry.size.height * 0.05))
                                         .padding(.top, 100)
                                         .padding([.trailing, .leading], 100)
                                 }
@@ -65,6 +65,7 @@ struct IntroView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
         
     }
 }

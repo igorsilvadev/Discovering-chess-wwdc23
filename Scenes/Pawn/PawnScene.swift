@@ -10,8 +10,10 @@ import SpriteKit
 
 class PawnScene: ChessScene {
     
+    /// Specific method to move pawn in promotion position
+    /// - Parameter step: step to promote
     func pawnPromotion(_ step: Int) {
-        guard let pawn = board.board[6][3] else { return }
+        guard let pawn = board.pieces[6][3] else { return }
         
         switch step {
         case 1:
@@ -35,8 +37,10 @@ class PawnScene: ChessScene {
     }
     
     
+    /// Move pawn to general positions
+    /// - Parameter step: step specific to move
     func movePawn(_ step: Int) {
-        guard let piece = board.board[1][4] else { return }
+        guard let piece = board.pieces[1][4] else { return }
         
         switch step {
         case 1:

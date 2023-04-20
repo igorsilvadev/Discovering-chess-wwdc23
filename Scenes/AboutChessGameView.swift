@@ -25,14 +25,14 @@ struct AboutChessGameView: View {
                         .resizable()
                         .overlay(alignment: .topTrailing) {
                             if step >= 0 {
-                                MessageView(finalText: "O xadrez é jogado em um tabuleiro com\n 64 casas,sendo 32 claras e 32 escuras.", fontSize: .system(size: geometry.size.height * 0.05))
+                                MessageView(finalText: "Chess is played on a board with 64 squares, \n32 light-colored and 32 dark-colored.", fontSize: .system(size: geometry.size.height * 0.05))
                                     .padding(.top, 100)
                                     .padding(.trailing, 100)
                             }
                         }
                         .overlay(alignment: .center) {
                             if step >= 1 {
-                                MessageView(finalText: "Cada jogador tem 16 peças, sendo 8 \npeões, 2 cavalos, 2 bispos, 2 torres,\n 1 rainha e 1 rei.", fontSize: .system(size: geometry.size.height * 0.05))
+                                MessageView(finalText: "Each player has 16 pieces, consisting of 8 pawns,\n 2 knights, 2 bishops, 2 rooks, 1 queen, and 1 king.", fontSize: .system(size: geometry.size.height * 0.05))
                                     .padding(.trailing, 200)
                             }
                         }

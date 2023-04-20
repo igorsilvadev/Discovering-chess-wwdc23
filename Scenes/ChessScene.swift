@@ -60,12 +60,12 @@ class ChessScene: SKScene, ObservableObject {
     private func drawChessPieces() {
         for row in GlobalDefinitions.boardRange {
             for column in GlobalDefinitions.boardRange {
-                board.board[row][column]?.sprite.position = CGPoint(
+                board.pieces[row][column]?.sprite.position = CGPoint(
                     x: column * GlobalDefinitions.tileSize + GlobalDefinitions.spriteOffset,
                     y: row * GlobalDefinitions.tileSize + GlobalDefinitions.spriteOffset
                 )
-                if board.board[row][column] != nil {
-                    addChild(board.board[row][column]!.sprite)
+                if board.pieces[row][column] != nil {
+                    addChild(board.pieces[row][column]!.sprite)
                 }
             }
         }
@@ -75,7 +75,7 @@ class ChessScene: SKScene, ObservableObject {
     
     func hidePieces(hide: Bool = true, showPieces: [PieceType], color: [PlayerType]) {
         guard hide else { return }
-        board.board.forEach { rows in
+        board.pieces.forEach { rows in
              rows.forEach { piece in
                  piece?.sprite.isHidden = !showPieces.contains(piece?.type ?? .none) || !color.contains(piece?.player ?? .none)
              }
